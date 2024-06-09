@@ -58,3 +58,7 @@ clean:
 	rm -rf $(CURRENT_DIR)/control.tar.xz
 	rm -rf $(CURRENT_DIR)/debian-binary
 	rm -rf $(CURRENT_DIR)/usr
+
+remove:
+	rm -rf $(PREFIX)/bin/install-go
+	rm -rf $(PREFIX)/bin/remove-go

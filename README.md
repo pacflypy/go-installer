@@ -20,3 +20,19 @@ make build
 (sudo) make install
 make clean
 ```
+
+# Uninstalling
+
+Generally you can use the Makefile for Uninstalling
+
+```bash
+(sudo) make remove
+```
+
+If you have install the .deb then use, for safe an Broken install
+
+```bash
+(sudo) apt remove go-installer
+```
+
+
