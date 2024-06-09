@@ -15,7 +15,7 @@ DEBIAN_BINARY=2.0
 
 .PHONY: all generate struct build install package clean
 
-all: generate struct build install package
+all: generate struct build package
 
 generate:
 	cd $(CURRENT_DIR)
@@ -39,7 +39,7 @@ build:
 	python3 -m zipapp --python '/usr/bin/env python3' --output $(CURRENT_DIR)/build/install-go --compress $(SRC_INSTALL)
 	python3 -m zipapp --python '/usr/bin/env python3' --output $(CURRENT_DIR)/build/remove-go --compress $(SRC_REMOVE)
 
-install:
+package:
 	cd $(CURRENT_DIR)
 	mv $(CURRENT_DIR)/build/install-go $(CURRENT_DIR)$(PREFIX)/bin/install-go
 	mv $(CURRENT_DIR)/build/remove-go $(CURRENT_DIR)$(PREFIX)/bin/remove-go
@@ -47,6 +47,9 @@ install:
 	tar -cJf $(CURRENT_DIR)/control.tar.xz ./control
 	echo $(DEBIAN_BINARY) > $(CURRENT_DIR)/debian-binary
 	ar rcs $(CURRENT_DIR)/$(PACKAGE_NAME)_$(VERSION)_all.deb debian-binary control.tar.xz data.tar.xz
+
+install:
+	mv $(CURRENT_DIR)/build/* $(PREFIX)/bin
 
 clean:
 	rm -rf $(CURRENT_DIR)/build
